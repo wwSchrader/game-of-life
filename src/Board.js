@@ -5,7 +5,23 @@ export default class Board extends Component {
     constructor(props) {
         super(props);
 
-        this.cellStatus = [[true, false], [false, true]]
+        this.height = 30;
+        this.length = 30;
+        this.cellStatus = this.initialCellState(this.height, this.length);
+    }
+
+    initialCellState(height, length) {
+        //initialize state of table by randomly assigning each cell a state
+        var cellArray = [];
+        for (var i = 0; i < height; i++) {
+            var rowArray = [];
+            for (var j = 0; j < length; j++) {
+                rowArray.push(Math.random() >= 0.5);
+            }
+            cellArray.push(rowArray);
+        }
+
+        return cellArray;
     }
 
     render() {
