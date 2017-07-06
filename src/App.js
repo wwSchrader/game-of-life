@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import ContolPanel from './ControlPanel';
 import Board from './Board';
 
 class App extends Component {
   render() {
     return (
-      <Board />
+        <div>
+            <ContolPanel />
+            <Board />
+        </div>
     );
   }
 }
