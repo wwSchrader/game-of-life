@@ -9,9 +9,16 @@ class App extends Component {
         this.state = {
             count: 0,
             active: true,
-            reset: false,
-            cellStatus: this.initialCellState(50, 50)
+            cellStatus: this.initialCellState(50, 50, true)
         };
+    }
+
+    handleClearButtonPress() {
+        this.setState({
+            count: 0,
+            active: false,
+            cellStatus: this.initialCellState(50, 50, false)
+        });
     }
 
     componentDidMount() {
@@ -122,13 +129,18 @@ class App extends Component {
         }
     }
 
-    initialCellState(height, length) {
+    initialCellState(height, length, randomize) {
         //initialize state of table by randomly assigning each cell a state
         var cellArray = [];
         for (var i = 0; i < height; i++) {
             var rowArray = [];
             for (var j = 0; j < length; j++) {
-                rowArray.push(Math.random() >= 0.5);
+                if (randomize) {
+                    rowArray.push(Math.random() >= 0.5);
+                } else {
+                     rowArray.push(false);
+                }
+
             }
             cellArray.push(rowArray);
         }
@@ -149,6 +161,7 @@ class App extends Component {
                     onPlayButtonPress={() => this.handleButtonPress(true)}
                     onStopButtonPress={() => this.handleButtonPress(false)}
                     count={this.state.count}
+                    onClearButtonPress={() => this.handleClearButtonPress()}
                 />
                 <Board cellArray={this.state.cellStatus} />
             </div>
