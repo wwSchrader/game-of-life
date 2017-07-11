@@ -9,6 +9,15 @@ export default class Cell extends Component {
             alive: props.alive
         }
 
+        this.row = props.row;
+        this.column = props.column;
+
+        this.onHandleCellClicker = this.onHandleCellClicker.bind(this);
+
+    }
+
+    onHandleCellClicker(row, column) {
+        this.props.onClickhandler(row, column);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,7 +35,10 @@ export default class Cell extends Component {
             }
         }
         return (
-            <td className={cellState(this.state.alive)}></td>
+            <td
+            className={cellState(this.state.alive)}
+            onClick={() => {this.onHandleCellClicker(this.row, this.column)}}
+            ></td>
         );
     }
 }

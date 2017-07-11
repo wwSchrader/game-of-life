@@ -11,6 +11,8 @@ class App extends Component {
             active: true,
             cellStatus: this.initialCellState(50, 50, true)
         };
+
+        this.handleCellPress = this.handleCellPress.bind(this);
     }
 
     handleClearButtonPress() {
@@ -154,6 +156,18 @@ class App extends Component {
         });
     }
 
+    handleCellPress(row, column) {
+        var oldState = this.state.cellStatus;
+        //find the selected cell state and return flipped value
+        var changedCellStatus = !oldState[row][column];
+        var newState = oldState.slice();
+        newState[row][column] = changedCellStatus;
+
+        this.setState({
+            cellStatus: newState
+        });
+    }
+
     render() {
         return (
             <div>
@@ -163,7 +177,10 @@ class App extends Component {
                     count={this.state.count}
                     onClearButtonPress={() => this.handleClearButtonPress()}
                 />
-                <Board cellArray={this.state.cellStatus} />
+                <Board
+                cellArray={this.state.cellStatus}
+                onCellPress={this.handleCellPress}
+                />
             </div>
         );
     }

@@ -8,6 +8,12 @@ export default class Board extends Component {
         this.state = {
             cellStatus: props.cellArray
         }
+
+        this.handleCellPress = this.handleCellPress.bind(this);
+    }
+
+    handleCellPress(row, column){
+        this.props.onCellPress(row, column);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -17,11 +23,15 @@ export default class Board extends Component {
     }
 
     render() {
-
-        var row = this.state.cellStatus.map(function (item, i) {
-            var entry = item.map(function (element, j) {
+        var row = this.state.cellStatus.map((item, i) => {
+            var entry = item.map((element, j) => {
                 return (
-                    <Cell key={i + "" + j} alive={element}/>
+                    <Cell key={i + "" + j}
+                    alive={element}
+                    row={i}
+                    column={j}
+                    onClickhandler={this.handleCellPress}
+                    />
                 );
             });
             return (
