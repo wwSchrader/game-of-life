@@ -27,7 +27,8 @@ class App extends Component {
         //if status is active, calculate a generation
         if (this.state.active) {
             this.setState({
-            cellStatus: this.generation(oldState)
+            cellStatus: this.generation(oldState),
+            count: this.state.count + 1
             });
         }
 
@@ -147,6 +148,7 @@ class App extends Component {
                 <ContolPanel
                     onPlayButtonPress={() => this.handleButtonPress(true)}
                     onStopButtonPress={() => this.handleButtonPress(false)}
+                    count={this.state.count}
                 />
                 <Board cellArray={this.state.cellStatus} />
             </div>

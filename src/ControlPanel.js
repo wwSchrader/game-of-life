@@ -5,6 +5,16 @@ export default class ControlPanel extends Component {
         super(props);
         this.handlePlayButtonPress = this.handlePlayButtonPress.bind(this);
         this.handleStopButtonPress = this.handleStopButtonPress.bind(this);
+
+        this.state = {
+            count: props.count
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            count: nextProps.count
+        })
     }
 
     handlePlayButtonPress(e) {
@@ -20,7 +30,7 @@ export default class ControlPanel extends Component {
                 <button onClick={this.handlePlayButtonPress}>Play</button>
                 <button onClick={this.handleStopButtonPress}>Stop</button>
                 <button>Clear</button>
-                <h4>Generation: </h4>
+                <h4>Generation: {this.state.count}</h4>
             </div>
         );
     }
