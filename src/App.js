@@ -23,11 +23,14 @@ class App extends Component {
     }
 
     tick() {
-
         var oldState = this.state.cellStatus;
-        this.setState({
+        //if status is active, calculate a generation
+        if (this.state.active) {
+            this.setState({
             cellStatus: this.generation(oldState)
-        });
+            });
+        }
+
     }
 
     generation(oldState) {
@@ -104,8 +107,6 @@ class App extends Component {
             }
         }
 
-
-
         //determine if cell will be live or dead based on number of neighbors
         if (oldState[i][j] === false) {
             if (counter === 3) {
@@ -134,10 +135,19 @@ class App extends Component {
         return cellArray;
     }
 
+    handleButtonPress(status) {
+        this.setState({
+            active: status
+        });
+    }
+
     render() {
         return (
             <div>
-                <ContolPanel />
+                <ContolPanel
+                    onPlayButtonPress={() => this.handleButtonPress(true)}
+                    onStopButtonPress={() => this.handleButtonPress(false)}
+                />
                 <Board cellArray={this.state.cellStatus} />
             </div>
         );
