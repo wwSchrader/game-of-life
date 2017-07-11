@@ -171,6 +171,7 @@ class App extends Component {
     render() {
         return (
             <div>
+                <h1>Game of Life</h1>
                 <ContolPanel
                     onPlayButtonPress={() => this.handleButtonPress(true)}
                     onStopButtonPress={() => this.handleButtonPress(false)}
